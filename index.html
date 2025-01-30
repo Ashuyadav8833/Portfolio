@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ashu Yadav - Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        :root {
+            --navy-blue: #0a192f;
+            --light-navy: #112240;
+            --white: #e6f1ff;
+            --accent: #64ffda;
+        }
+
+        body {
+            background-color: var(--navy-blue);
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin: 0 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        /* Sections Common Styles */
+        section {
+            padding: 6rem 2rem;
+            min-height: 100vh;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        /* Home Section */
+        #home {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+        }
+
+        .home-content {
+            max-width: 600px;
+        }
+
+        .home-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .home-content p {
+            font-size: 1.2rem;
+            color: #8892b0;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            background: url('Profile-picture-main.jpg') center/cover;
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--accent);
+        }
+
+        .timeline-item {
+            padding: 20px 40px;
+            position: relative;
+            width: 50%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+
+        .timeline-content {
+            background: var(--light-navy);
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 25px;
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
+        }
+
+        /* Projects Section */
+        .projects-container {
+            overflow: hidden;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .projects-slider {
+            display: flex;
+            animation: slide 20s linear infinite;
+        }
+
+        .project-card {
+            min-width: 300px;
+            background: var(--light-navy);
+            margin: 1rem;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* About Section */
+        #about {
+            text-align: center;
+        }
+
+        .about-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 2px solid var(--accent);
+            background: url('Profile-picture-main.jpg') center/cover;
+        }
+
+        .social-icons {
+            margin-top: 2rem;
+        }
+
+        .social-icons a {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #home {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 6rem;
+            }
+
+            .profile-img {
+                margin-top: 2rem;
+            }
+
+            .home-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                left: 0;
+                text-align: left;
+            }
+
+            .timeline-item::after {
+                left: 10px;
+            }
+        }
+
+        /* Add this footer styling */
+        .site-footer {
+            background-color: var(--light-navy);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+            border-top: 2px solid var(--accent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-text {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: #8892b0;
+        }
+
+        .footer-text a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .footer-text a:hover {
+            color: var(--white);
+        }
+
+        /* Add to existing responsive styles */
+        @media (max-width: 768px) {
+            .site-footer {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Updated image container styles */
+        .profile-img, .about-img {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 3px solid var(--accent);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .about-img {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Image element styling */
+        .profile-img img, .about-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hover effects */
+        .profile-img:hover, .about-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(100, 255, 218, 0.2);
+        }
+
+        .profile-img:hover img, .about-img:hover img {
+            transform: scale(1);
+        }
+
+        /* Updated Certificates Section Styles */
+        #certificates {
+            padding: 4rem 2rem;
+            background-color: var(--navy-blue);
+        }
+
+        .certificates-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .certificates-slider {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: calc(33% - 1rem);
+            gap: 2rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            padding: 1rem 0;
+        }
+
+        .certificates-slider::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .certificates-slider::-webkit-scrollbar-track {
+            background: var(--light-navy);
+            border-radius: 4px;
+        }
+
+        .certificates-slider::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        .certificate-card {
+            scroll-snap-align: start;
+            background: var(--light-navy);
+            border-radius: 10px;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(100, 255, 218, 0.2);
+        }
+
+        .certificate-image {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #fff;
+            padding: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .certificate-image:hover {
+            transform: scale(1.03);
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(10, 25, 47, 0.9);
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-nav:hover {
+            background: var(--accent);
+            color: var(--navy-blue);
+        }
+
+        .slider-nav.prev {
+            left: -50px;
+        }
+
+        .slider-nav.next {
+            right: -50px;
+        }
+
+        @media (max-width: 768px) {
+            .certificates-slider {
+                grid-auto-columns: calc(50% - 1rem);
+            }
+            
+            .slider-nav {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .slider-nav.prev {
+                left: -30px;
+            }
+            
+            .slider-nav.next {
+                right: -30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .certificates-slider {
+                grid-auto-columns: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Skills</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home">
+        <div class="home-content">
+            <h1>I'm Ashu Yadav.<br>A Software Developer</h1>
+            <p>Software Engineering student specializing in web development with expertise in JavaScript, Python, and C++. Passionate about creating efficient and scalable solutions.</p>
+        </div>
+        <div class="profile-img">
+            <img src="Profile-picture-main.jpg" alt="Ashu Yadav">
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>10th Grade</h3>
+                    <p>Completed secondary education with 80.4% marks from Green Valley Public School</p>
+                    <span>2019-2020</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>12th Grade</h3>
+                    <p>Completed higher secondary education in Maths stream from Green Valley Public School</p>
+                    <span>2021-2022</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>B.Tech CSE</h3>
+                    <p>Currently pursuing Computer Science Engineering from Baderia Global Institute of Engineering And Management</p>
+                    <span>2023-2027</span>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <h3>Internship</h3>
+                    <p>Completed Internship from AICTE Eduskills on Palo Alto Cybersecurity and earned a Certificate from AICTE Internship Portal</p>
+                    <span>2024</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Skills</h2>
+        <div class="projects-container">
+            <div class="projects-slider">
+                <div class="project-card">
+                    <h3>Frontend Development</h3>
+                    <p>I specialize in creating visually appealing and responsive websites, with a focus on HTML, CSS and JavaScript. I ensure seamless user experiences acroos all devices</p>
+                </div>
+                <div class="project-card">
+                    <h3>C/C++</h3>
+                    <p>Proficient in C and C++, with expertise in data structures, algorithms, OOP, and system programming. Experienced in writing optimized, high-performance code for software development and competitive programming.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Python</h3>
+                    <p>Skilled in Python for web development, automation, and data analysis. Familiar with Flask/Django, NumPy, and Pandas, with a focus on writing clean, scalable code.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Git & GitHub</h3>
+                    <p>Experienced in version control using Git, managing repositories, branching, and resolving merge conflicts. Proficient in GitHub workflows, collaboration, and open-source contributions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About</h2>
+        <div class="about-img">
+            <img src="Profile-picture-main.jpg" alt="Ashu Yadav">
+        </div>
+        <h3>Ashu Yadav</h3>
+        <p>Software Developer & Student</p>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/ashu_yadav_8833?utm_source=qr&igsh=dDN5M2pyMHU3Mm5n" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/in/ashutosh-yadav-39079430b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Ashuyadav8833" target="_blank"><i class="fab fa-github"></i></a>
+        </div>
+    </section>
+
+    <section id="certificates">
+        <h2 class="section-title">Certifications</h2>
+        <div class="certificates-container">
+            <button class="slider-nav prev">&lt;</button>
+            <button class="slider-nav next">&gt;</button>
+            <div class="certificates-slider">
+                <div class="certificate-card">
+                    <img src="certificate-1.jpg" alt="Certificate 1" class="certificate-image">
+                    <p class="certificate-title">Python Programming</p>
+                </div>
+                <div class="certificate-card">
+                    <img src="certificate-2.jpg" alt="Certificate 2" class="certificate-image">
+                    <p class="certificate-title">Machine Learning</p>
+                </div>
+                <div class="certificate-card">
+                    <img src="certificate-3.jpg" alt="Certificate 3" class="certificate-image">
+                    <p class="certificate-title">Artificial Intelligence</p>
+                </div>
+                <div class="certificate-card">
+                    <img src="certificate-4.png" alt="Certificate 4" class="certificate-image">
+                    <p class="certificate-title">C++ Mastery</p>
+                </div>
+                <div class="certificate-card">
+                    <img src="certificate-5.png" alt="Certificate 5" class="certificate-image">
+                    <p class="certificate-title">Cybersecurity</p>
+                </div>
+                <div class="certificate-card">
+                    <img src="certificate-6.png" alt="Certificate 6" class="certificate-image">
+                    <p class="certificate-title">Android Development</p>
+                </div>
+                <!-- Add more certificate cards as needed -->
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-text">&copy; 2024 Ashu Yadav. All rights reserved.</p>
+            <p class="footer-text">
+                Connect with me: 
+                <a href="https://www.linkedin.com/in/ashutosh-yadav-39079430b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">LinkedIn</a> | 
+                <a href="https://github.com/Ashuyadav8833" target="_blank">GitHub</a> | 
+                <a href="https://www.instagram.com/ashu_yadav_8833?utm_source=qr&igsh=dDN5M2pyMHU3Mm5n" target="_blank">Instagram</a>
+            </p>
+            <p class="footer-text">Designed with ❤️ using HTML, CSS & JavaScript</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Infinite project slider
+        const slider = document.querySelector('.projects-slider');
+        const projects = document.querySelectorAll('.project-card');
+        
+        // Clone projects for infinite effect
+        projects.forEach(project => {
+            const clone = project.cloneNode(true);
+            slider.appendChild(clone);
+        });
+
+        // Pause animation on hover
+        slider.addEventListener('mouseenter', () => {
+            slider.style.animationPlayState = 'paused';
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            slider.style.animationPlayState = 'running';
+        });
+
+        // Certificates Slider Functionality
+        const slider2 = document.querySelector('.certificates-slider');
+        const prevBtn = document.querySelector('.slider-nav.prev');
+        const nextBtn = document.querySelector('.slider-nav.next');
+
+        // Calculate scroll amount based on card width
+        const getScrollAmount = () => {
+            const card = slider2.querySelector('.certificate-card');
+            return card ? card.offsetWidth + 32 : 0; // 32px for gap
+        };
+
+        // Navigation button handlers
+        prevBtn.addEventListener('click', () => {
+            slider2.scrollBy({
+                left: -getScrollAmount(),
+                behavior: 'smooth'
+            });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            slider2.scrollBy({
+                left: getScrollAmount(),
+                behavior: 'smooth'
+            });
+        });
+
+        // Touch/swipe detection
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        slider2.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        slider2.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) { // Minimum swipe distance
+                if (diff > 0) {
+                    slider2.scrollBy({
+                        left: getScrollAmount(),
+                        behavior: 'smooth'
+                    });
+                } else {
+                    slider2.scrollBy({
+                        left: -getScrollAmount(),
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
